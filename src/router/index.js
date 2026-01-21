@@ -11,22 +11,65 @@ import { createRouter, createWebHistory } from "vue-router";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    { path: "/", name: "Login", component: Login },
+    {
+      path: "/login",
+      name: "Login",
+      component: Login,
+      meta: { title: "Login" }
+    },
     {
       path: "/",
-      redirect: "dashboard",
-      name: "Dasboard",
       component: DasboardLayout,
+      redirect: "/dashboard",
       children: [
-        { path: "/dashboard", name: "Dashboard", component: Dashboard },
-        { path: "/user-directory", name: "UserDiretory", component: UserDiretory },
-        { path: "/access-control", name: "AccessControl", component: AccessControl },
-        { path: "/performance", name: "Performance", component: Performance },
-        { path: "/security-alerts", name: "SecurityAlerts", component: SecurityAlert},
-        { path: "/audit-trails", name: "AuditTrails", component:AuditTrail},
-      ],
-    },
+        {
+          path: "dashboard",
+          name: "Dashboard",
+          component: Dashboard,
+          meta: { title: "Dashboard" }
+        },
+        {
+          path: "user-directory",
+          name: "UserDirectory",
+          component: UserDiretory,
+          meta: { title: "User Directory" }
+        },
+        {
+          path: "access-control",
+          name: "AccessControl",
+          component: AccessControl,
+          meta: { title: "Access Control" }
+        },
+        {
+          path: "performance",
+          name: "Performance",
+          component: Performance,
+          meta: { title: "Performance" }
+        },
+        {
+          path: "security-alerts",
+          name: "SecurityAlerts",
+          component: SecurityAlert,
+          meta: { title: "Security Alerts" }
+        },
+        {
+          path: "audit-trails",
+          name: "AuditTrails",
+          component: AuditTrail,
+          meta: { title: "Audit Trails" }
+        }
+      ]
+    }
   ],
+  linkActiveClass: "active"
 });
+
+router.beforeEach((to, from, next) => {
+  document.title = to.meta.title
+    ? `${to.meta.title} | ReabList`
+    : 'ReabList';
+  next();
+});
+
 
 export default router;
