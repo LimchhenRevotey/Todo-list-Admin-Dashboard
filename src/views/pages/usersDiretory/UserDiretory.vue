@@ -94,7 +94,7 @@ async function toggleStatus(user) {
         <template #cell-role="{ row }">
           <span class="badge rounded-pill px-3 py-2" :class="row.role?.name?.toLowerCase().includes('admin')
             ? 'bg-primary-subtle text-primary'
-            : 'bg-secondary-subtle text-secondary'">
+            : 'bg-info-subtle text-info'">
             {{ row.role?.name || 'User' }}
           </span>
         </template>
