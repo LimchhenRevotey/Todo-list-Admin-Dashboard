@@ -78,8 +78,10 @@ const router = createRouter({
           component: AuditTrail,
           meta: { title: "Audit Trails" },
         },
+        
       ],
     },
+
   ],
   linkActiveClass: "active",
 });
