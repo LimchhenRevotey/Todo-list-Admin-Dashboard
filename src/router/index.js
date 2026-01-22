@@ -6,6 +6,7 @@ import Dashboard from "@/views/pages/dashboard/dashboard.vue";
 import Performance from "@/views/pages/performance/Performance.vue";
 import SecurityAlert from "@/views/pages/security/SecurityAlert.vue";
 import UserDiretory from "@/views/pages/usersDiretory/UserDiretory.vue";
+import ViewUser from "@/views/pages/usersDiretory/ViewUser.vue";
 import { createRouter, createWebHistory } from "vue-router";
 
 const router = createRouter({
@@ -15,7 +16,7 @@ const router = createRouter({
       path: "/login",
       name: "Login",
       component: Login,
-      meta: { title: "Login" }
+      meta: { title: "Login" },
     },
     {
       path: "/",
@@ -26,55 +27,66 @@ const router = createRouter({
           path: "dashboard",
           name: "Dashboard",
           component: Dashboard,
-          meta: { title: "Dashboard" }
+          meta: { title: "Dashboard" },
         },
         {
           path: "user-directory",
-          name: "UserDirectory",
-          component: UserDiretory,
-          meta: { title: "User Directory" }
+          children: [
+            {
+              path: "",
+              name: "UserDirectory",
+              component: UserDiretory,
+              meta: { title: "User Directory" },
+            },
+            {
+              path: "/view-user/:id",
+              name: "View-User",
+              component: ViewUser,
+              props:true,
+              meta: { title: "View User" },
+            },
+          ],
         },
         {
           path: "access-control",
           name: "AccessControl",
           component: AccessControl,
-          meta: { title: "Access Control" }
+          meta: { title: "Access Control" },
         },
         {
           path: "performance",
           name: "Performance",
           component: Performance,
-          meta: { title: "Performance" }
+          meta: { title: "Performance" },
         },
         {
           path: "security-alerts",
           name: "SecurityAlerts",
           component: SecurityAlert,
-          meta: { title: "Security Alerts" }
+          meta: { title: "Security Alerts" },
         },
         {
           path: "audit-trails",
           name: "AuditTrails",
           component: AuditTrail,
-          meta: { title: "Audit Trails" }
-        }
-      ]
-    }
+          meta: { title: "Audit Trails" },
+        },
+      ],
+    },
   ],
-  linkActiveClass: "active"
+  linkActiveClass: "active",
 });
 
 router.beforeEach((to, from, next) => {
-  let token = localStorage.getItem('token');
-  document.title = to.meta.title ? `${to.meta.title} | ReabList`: 'ReabList';
-    if(!token && to.name !== 'Login'){
-    next  ({name: 'Login'});
-  }else if(token && to.name === 'Login'){
-     next  ({name: 'Dashboard'});
-  }else{
+  let token = localStorage.getItem("token");
+  document.title = to.meta.title ? `${to.meta.title} | ReabList` : "ReabList";
+  if (!token && to.name !== "Login") {
+    next({ name: "Login" });
+  } else if (token && to.name === "Login") {
+    next({ name: "Dashboard" });
+  } else {
     next();
   }
 });
-
 
 export default router;

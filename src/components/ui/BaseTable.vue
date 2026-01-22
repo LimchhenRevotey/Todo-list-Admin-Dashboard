@@ -2,49 +2,25 @@
   <table class="table mb-0">
     <thead>
       <tr class="text-center">
-        <th class="ps-4 text-start">User Details</th>
-        <th>Role</th>
-        <th>Account Status</th>
-        <th>Actions</th>
+        <th v-for="col in columns" :key="col.key" :class="col.class">
+          {{ col.label }}
+        </th>
+        <th v-if="$slots.actions">Actions</th>
       </tr>
     </thead>
+
     <tbody class="align-middle text-center">
-      <tr v-for="user in users" :key="user.id">
-        <td class="ps-4 py-3 text-start">
-          <div class="fw-bold">{{ user.fullname }}</div>
-          <div class="text-muted small">{{ user.email }}</div>
+      <tr v-for="row in rows" :key="row.id">
+        <td v-for="col in columns" :key="col.key" :class="col.bodyClass">
+          <!-- Custom cell -->
+          <slot :name="`cell-${col.key}`" :row="row">
+            {{ row[col.key] }}
+          </slot>
         </td>
 
-        <td>
-          <span class="badge" :class="user.role?.name.trim().toLowerCase() === 'admin'
-              ? 'bg-primary-subtle text-primary'
-              : 'bg-danger-subtle text-danger'
-            ">
-            {{ user.role?.name }}
-          </span>
-        </td>
-
-        <td>
-          <span class="badge-status" :class="user.status
-              ? 'bg-success-subtle text-success'
-              : 'bg-danger-subtle text-danger'
-            ">
-            {{ user.status ? "Active" : "Activated" }}
-          </span>
-        </td>
-
-        <td class="text-center">
-          <button class="btn btn-sm action-view" title="View Detail" @click="$emit('view', user)">
-            <square-pen />
-          </button>
-
-          <button class="btn btn-sm action-edit ms-1" title="Update User" @click="$emit('edit', user)">
-            <eye />
-          </button>
-
-          <button class="btn btn-sm ms-1 action-delete" title="Toggle Status">
-            <trash />
-          </button>
+        <!-- Actions -->
+        <td v-if="$slots.actions">
+          <slot name="actions" :row="row" />
         </td>
       </tr>
     </tbody>
@@ -53,14 +29,18 @@
 
 <script setup>
 defineProps({
-  users: {
+  columns: {
+    type: Array,
+    required: true,
+  },
+  rows: {
     type: Array,
     required: true,
   },
 });
 </script>
 
-<style>
+<style scoped>
 .table thead th {
   background: #daeaeb;
   font-size: 1rem;
@@ -71,31 +51,5 @@ defineProps({
 
 .table tbody td {
   background: #f3f3f3;
-}
-
-.badge-status {
-  padding: 0.4em 0.8em;
-  border-radius: 2rem;
-  font-weight: 700;
-  font-size: 0.75rem;
-}
-
-.badge {
-  padding: 0.4em 0.8em;
-  border-radius: 2rem;
-  font-weight: 700;
-  font-size: 0.75rem;
-}
-
-.action-view {
-  color: #0d6dfd96;
-}
-
-.action-edit {
-  color: #1987549c;
-}
-
-.action-delete {
-  color: #dc3546c3;
 }
 </style>
