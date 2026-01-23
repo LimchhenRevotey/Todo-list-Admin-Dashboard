@@ -43,13 +43,10 @@ const viewUser = (user) => {
   router.push({ name: "View-User", params: { id: user.id } });
 };
 
-const updateUser = (user) => {
-  router.push({ name: "UpdateUser", params: { id: user.id } });
-};
-
 const createUser = () => {
   router.push({ name: "CreateUser" });
 };
+
 // Toggle User Status
 async function toggleStatus(user) {
   const isActive = user.status === 'ACTIVATED' || user.status === true || user.status === 1;
@@ -118,9 +115,9 @@ async function toggleStatus(user) {
             <button class="btn-action-modern btn-view" title="View Profile" @click="viewUser(row)">
               <Eye :size="18" />
             </button>
-            <button class="btn-action-modern btn-edit" title="Edit User" @click="updateUser(row)">
+            <!-- <button class="btn-action-modern btn-edit" title="Edit User" @click="updateUser(row)">
               <SquarePen :size="18" />
-            </button>
+            </button> -->
           </div>
         </template>
 

@@ -1,5 +1,13 @@
+<script setup>
+import { useRoleStore } from "@/stores/roleStore";
+import { onMounted } from "vue";
+
+const roleStore = useRoleStore();
+onMounted(() => {
+    roleStore.getRoles();
+});
+</script>
 <template>
-    <!-- 3. ROLES & PERMISSIONS -->
     <section id="section-roles" class="content-section">
         <h4 class="fw-bold mb-4">RBAC: Admin & User Permissions</h4>
         <div class="row g-4">
@@ -18,31 +26,36 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="text-start fw-bold">Admin</td>
+                                <tr v-for="role in roleStore.roles" :key="role.id">
+                                    <td class="text-start fw-bold">{{ role.name }}</td>
+
+                                    <!-- Get All Users -->
                                     <td class="text-success">
-                                       <check-circle/>
+                                        <check-circle />
                                     </td>
+
+                                    <!-- Get Single User -->
                                     <td class="text-success">
-                                        <check-circle/>
+                                        <check-circle />
                                     </td>
-                                    <td class="text-success">
-                                        <check-circle/>
+
+                                    <!-- Create User -->
+                                    <td :class="role.name?.toLowerCase() === 'admin'
+                                            ? 'text-success'
+                                            : 'text-danger'
+                                        ">
+                                        <check-circle v-if="role.name?.toLowerCase() === 'admin'" />
+                                        <x-circle v-else />
                                     </td>
-                                    <td class="text-success">
-                                        <check-circle/>
+
+                                    <!-- Change Status -->
+                                    <td :class="role.name?.toLowerCase() === 'admin'
+                                            ? 'text-success'
+                                            : 'text-danger'
+                                        ">
+                                        <check-circle v-if="role.name?.toLowerCase() === 'admin'" />
+                                        <x-circle v-else />
                                     </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-start fw-bold">User</td>
-                                    <td class="text-success">
-                                        <check-circle/>
-                                    </td>
-                                    <td class="text-success">
-                                        <check-circle/>
-                                    </td>
-                                    <td class="text-danger"><x-circle/></td>
-                                    <td class="text-danger"><x-circle/></td>
                                 </tr>
                             </tbody>
                         </table>
