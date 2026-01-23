@@ -1,6 +1,20 @@
 <script setup>
+import { onMounted } from 'vue';
+import api from '@/api/api';
+import { ref } from 'vue';
 
+const admin = ref({});
 
+onMounted(async() => {
+   try{
+        const res = await api.get('/auth/profile');
+        admin.value = res.data.data;
+        
+   }
+   catch(error){
+        console.log(error);
+   }
+});
 </script>
 
 <template>
@@ -19,12 +33,12 @@
         <div class="d-flex align-items-center gap-3">
             <div class="d-flex align-items-center gap-2 border-end pe-3">
                 <div class="text-end d-none d-sm-block">
-                    <div class="fw-bold small">Alex Thompson</div>
+                    <div class="fw-bold small">{{ admin.fullname }}</div>
                     <div class="text-muted"
-                        style="font-size: 10px; font-weight: 800; color: var(--brand-primary) !important;">ROOT ACCESS
+                        style="font-size: 10px; font-weight: 800; color: var(--brand-primary) !important;">{{ admin.email }}
                     </div>
                 </div>
-                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" class="rounded-circle border"
+                <img :src="admin.avatar" class="rounded-circle border"
                     width="40" alt="Admin">
 
             </div>
