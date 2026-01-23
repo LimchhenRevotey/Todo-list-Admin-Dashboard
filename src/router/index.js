@@ -4,6 +4,8 @@ import AccessControl from "@/views/pages/accesscontrol/AccessControl.vue";
 import AuditTrail from "@/views/pages/audit/AuditTrail.vue";
 import Dashboard from "@/views/pages/dashboard/dashboard.vue";
 import Performance from "@/views/pages/performance/Performance.vue";
+import EditProfile from "@/views/pages/profile/EditProfile.vue";
+import Profile from "@/views/pages/profile/Profile.vue";
 import SecurityAlert from "@/views/pages/security/SecurityAlert.vue";
 import CreateUser from "@/views/pages/usersDiretory/CreateUser.vue";
 import UserDiretory from "@/views/pages/usersDiretory/UserDiretory.vue";
@@ -29,6 +31,25 @@ const router = createRouter({
           name: "Dashboard",
           component: Dashboard,
           meta: { title: "Dashboard" },
+        },
+        {
+          path: "profile",
+          
+          children: [
+            {
+              path: "",
+              name: "Profile",
+              component: Profile,
+              meta: { title: "Profile" },
+            },
+            {
+              path: "/editProfile",
+              name: "Edit Profile",
+              component: EditProfile,
+              props:true,
+              meta: { title: "Edit Profile" },
+            }
+          ],
         },
         {
           path: "user-directory",

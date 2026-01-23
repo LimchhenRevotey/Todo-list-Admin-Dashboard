@@ -34,11 +34,11 @@ const viewUser = async () => {
                     @click="$router.go(-1)">
                     <i class="bi bi-chevron-left" style="-webkit-text-stroke: 1px;"></i>
                 </button>
-                <h3 class="fw-bold mb-0">User profile insights</h3>
+                <h3 class="fw-bold mb-0">ព័ត៌មានលម្អិតអ្នកប្រើប្រាស់</h3>
             </div>
 
             <button class="btn btn-custom-teal text-white px-4 py-2 rounded-2 d-flex align-items-center gap-2">
-                <i class="bi bi-pencil-square"></i> Edit profile
+                <i class="bi bi-pencil-square"></i> កែប្រែគណនី
             </button>
         </div>
 
@@ -65,7 +65,7 @@ const viewUser = async () => {
 
                         <div class="text-start px-0">
                             <div class="d-flex justify-content-between mb-3">
-                                <span class="text-muted">Account Status:</span>
+                                <span class="text-muted">ស្ថានភាពគណនី:</span>
                                 <span :class="(user.status === 'ACTIVATED' || user.status === true || user.status === 1)
                                     ? 'text-success fw-bold'
                                     : 'text-danger fw-bold'">
@@ -74,12 +74,12 @@ const viewUser = async () => {
                                 </span>
                             </div>
                             <div class="d-flex justify-content-between mb-3">
-                                <span class="fw-medium text-secondary">Member Since :</span>
+                                <span class="fw-medium text-secondary">សមាជិកតាំងពី :</span>
                                 <span class="fw-bold text-dark">{{ formatDate(user?.registeredAt) }}</span>
                             </div>
                             <div class="d-flex justify-content-between">
-                                <span class="fw-medium text-secondary">Last Login :</span>
-                                <span class="fw-bold text-dark">2 mins ago</span>
+                                <span class="fw-medium text-secondary">ការចូលចុងក្រោយ :</span>
+                                <span class="fw-bold text-dark">២ នាទីមុន</span>
                             </div>
                         </div>
                     </div>
@@ -90,32 +90,32 @@ const viewUser = async () => {
                 <div class="card border-0 shadow-sm rounded-4 p-4 h-100">
                     <div class="card-body">
 
-                        <h5 class="fw-bold mb-4">Activity Summary</h5>
+                        <h5 class="fw-bold mb-4">សង្ខេបសកម្មភាព</h5>
 
                         <div class="row g-3 mb-5">
                             <div class="col-md-4">
                                 <div class="stat-box stat-gray p-4 rounded-4 text-center">
                                     <h2 class="fw-bold mb-1" style="color: #4b5563;">142</h2>
-                                    <div class="small fw-bold text-secondary tracking-wide">TASKS CREATE</div>
+                                    <div class="small fw-bold text-secondary tracking-wide">បានបង្កើតភារកិច្ច</div>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="stat-box stat-blue p-4 rounded-4 text-center">
                                     <h2 class="fw-bold mb-1" style="color: #2563eb;">128</h2>
                                     <div class="small fw-bold text-primary-subtle tracking-wide"
-                                        style="color: #60a5fa;">TASKS DONE</div>
+                                        style="color: #60a5fa;">បានបញ្ចប់ភារកិច្ច</div>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="stat-box stat-green p-4 rounded-4 text-center">
                                     <h2 class="fw-bold mb-1" style="color: #16a34a;">90%</h2>
                                     <div class="small fw-bold text-success-subtle tracking-wide"
-                                        style="color: #4ade80;">EFFICIENCY</div>
+                                        style="color: #4ade80;">ប្រសិទ្ធភាព</div>
                                 </div>
                             </div>
                         </div>
 
-                        <h5 class="fw-bold mb-3">Recent Interaction Logo</h5>
+                        <h5 class="fw-bold mb-3">កំណត់ត្រាសកម្មភាពថ្មីៗ</h5>
                         <hr class="mb-4 text-muted opacity-25">
 
                         <div class="vstack gap-3">
@@ -123,13 +123,13 @@ const viewUser = async () => {
                                 <div class="icon-circle me-3 text-success">
                                     <i class="bi bi-check-circle fs-5"></i>
                                 </div>
-                                <span class="fw-medium">Completed Tasks</span>
+                                <span class="fw-medium">ភារកិច្ចដែលបានបញ្ចប់</span>
                             </div>
                             <div class="d-flex align-items-center">
                                 <div class="icon-circle me-3 text-primary">
                                     <i class="bi bi-pencil-square fs-5"></i>
                                 </div>
-                                <span class="fw-medium">Created Tasks</span>
+                                <span class="fw-medium">ភារកិច្ចដែលបានបង្កើត</span>
                             </div>
                         </div>
 

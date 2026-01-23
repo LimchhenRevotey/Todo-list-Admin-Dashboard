@@ -1,19 +1,17 @@
 <template>
-    <!-- Dashboard -->
     <section id="section-dashboard" class="content-section active">
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h3 class="fw-800 mb-0" style="font-weight: 800;">Command Center</h3>
+            <h3 class="fw-800 mb-0" style="font-weight: 800;">ផ្ទាំងព័ត៌មាន</h3>
             <div class="d-flex gap-2">
-                <button class="btn btn-light border btn-sm">Refresh Stats</button>
-                <button class="btn btn-brand btn-sm">Generate PDF Report</button>
+                <button class="btn btn-light border btn-sm">ផ្ទុកទិន្នន័យឡើងវិញ</button>
+                <button class="btn btn-brand btn-sm">បង្កើតរបាយការណ៍ PDF</button>
             </div>
         </div>
 
-        <!-- Expanded Dashboard Stats -->
         <div class="row g-4 mb-4">
             <div class="col-md-3">
                 <div class="card stat-card">
-                    <h6 class="text-muted small fw-bold mb-2">PLATFORM USERS</h6>
+                    <h6 class="text-muted small fw-bold mb-2">អ្នកប្រើប្រាស់ប្រព័ន្ធ</h6>
                     <div class="d-flex align-items-end justify-content-between">
                         <h3 class="fw-bold mb-0">12,482</h3>
                         <span class="text-success small fw-bold">+12.4% &uarr;</span>
@@ -25,10 +23,10 @@
             </div>
             <div class="col-md-3">
                 <div class="card stat-card">
-                    <h6 class="text-muted small fw-bold mb-2">ACTIVE TASKS</h6>
+                    <h6 class="text-muted small fw-bold mb-2">ភារកិច្ចកំពុងដំណើរការ</h6>
                     <div class="d-flex align-items-end justify-content-between">
                         <h3 class="fw-bold mb-0">45,021</h3>
-                        <span class="text-info small fw-bold">+820 today</span>
+                        <span class="text-info small fw-bold">+820 ថ្ងៃនេះ</span>
                     </div>
                     <div class="progress mt-3" style="height: 4px;">
                         <div class="progress-bar bg-info" style="width: 45%"></div>
@@ -37,10 +35,10 @@
             </div>
             <div class="col-md-3">
                 <div class="card stat-card">
-                    <h6 class="text-muted small fw-bold mb-2">AVG. COMPLETION</h6>
+                    <h6 class="text-muted small fw-bold mb-2">ការបញ្ចប់ជាមធ្យម</h6>
                     <div class="d-flex align-items-end justify-content-between">
                         <h3 class="fw-bold mb-0">68.5%</h3>
-                        <span class="text-success small fw-bold">Optimal</span>
+                        <span class="text-success small fw-bold">ល្អប្រសើរ</span>
                     </div>
                     <div class="progress mt-3" style="height: 4px;">
                         <div class="progress-bar bg-success" style="width: 68%"></div>
@@ -50,10 +48,10 @@
             <div class="col-md-3">
                 <div class="card stat-card" style="cursor: pointer"
                     onclick="document.querySelector('[data-section=\'reports\']').click()">
-                    <h6 class="text-muted small fw-bold mb-2">SECURITY ALERTS</h6>
+                    <h6 class="text-muted small fw-bold mb-2">ការជូនដំណឹងសុវត្ថិភាព</h6>
                     <div class="d-flex align-items-end justify-content-between">
                         <h3 class="fw-bold mb-0 text-danger">12</h3>
-                        <span class="text-danger small fw-bold">Action Req.</span>
+                        <span class="text-danger small fw-bold">តម្រូវឱ្យពិនិត្យ</span>
                     </div>
                     <div class="progress mt-3" style="height: 4px;">
                         <div class="progress-bar bg-danger" style="width: 90%"></div>
@@ -66,11 +64,11 @@
             <div class="col-lg-8">
                 <div class="card p-4 h-100">
                     <div class="d-flex justify-content-between align-items-center mb-4">
-                        <h6 class="fw-bold mb-0">Global Engagement Flow</h6>
+                        <h6 class="fw-bold mb-0">លំហូរនៃសកម្មភាពសរុប</h6>
                         <div class="btn-group btn-group-sm">
-                            <button class="btn btn-light border active">Week</button>
-                            <button class="btn btn-light border">Month</button>
-                            <button class="btn btn-light border">Year</button>
+                            <button class="btn btn-light border active">សប្ដាហ៍</button>
+                            <button class="btn btn-light border">ខែ</button>
+                            <button class="btn btn-light border">ឆ្នាំ</button>
                         </div>
                     </div>
                     <div class="d-flex align-items-end justify-content-between pt-5" style="height: 300px;">
@@ -84,22 +82,29 @@
                         <div class="bg-light rounded-top w-100 mx-1" style="height: 85%" title="Sun: 24.8k"></div>
                     </div>
                     <div class="d-flex justify-content-between mt-3 text-muted small fw-bold">
-                        <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+                        <span>ច័ន្ទ</span>
+                        <span>អង្គារ</span>
+                        <span>ពុធ</span>
+                        <span>ព្រហ</span>
+                        <span>សុក្រ</span>
+                        <span>សៅរ៍</span>
+                        <span>អាទិត្យ</span>
                     </div>
                 </div>
             </div>
+
             <div class="col-lg-4">
                 <div class="card p-4 h-100">
-                    <h6 class="fw-bold mb-4">Real-time Activity Feed</h6>
+                    <h6 class="fw-bold mb-4">សកម្មភាពបច្ចុប្បន្នជាក់ស្តែង</h6>
                     <div class="list-group list-group-flush small" id="activity-feed">
                         <div class="list-group-item px-0 py-3 border-0 border-bottom">
                             <div class="d-flex gap-2">
                                 <div class="p-1 bg-primary-subtle rounded text-primary"><i data-lucide="user-plus"
                                         size="14"></i></div>
                                 <div>
-                                    <p class="mb-0 fw-bold">New user registered</p>
-                                    <p class="mb-0 text-muted small">Sarah Jenkins joined the platform.</p>
-                                    <small class="text-muted">2 mins ago</small>
+                                    <p class="mb-0 fw-bold">អ្នកប្រើប្រាស់ថ្មីបានចុះឈ្មោះ</p>
+                                    <p class="mb-0 text-muted small">Sarah Jenkins បានចូលរួមក្នុងប្រព័ន្ធ</p>
+                                    <small class="text-muted">២ នាទីមុន</small>
                                 </div>
                             </div>
                         </div>
@@ -108,9 +113,9 @@
                                 <div class="p-1 bg-success-subtle rounded text-success"><i data-lucide="check"
                                         size="14"></i></div>
                                 <div>
-                                    <p class="mb-0 fw-bold">Milestone Reached</p>
-                                    <p class="mb-0 text-muted small">Task #4021 completed globally.</p>
-                                    <small class="text-muted">12 mins ago</small>
+                                    <p class="mb-0 fw-bold">សម្រេចបានសមិទ្ធផល</p>
+                                    <p class="mb-0 text-muted small">ភារកិច្ច #4021 បានបញ្ចប់</p>
+                                    <small class="text-muted">១២ នាទីមុន</small>
                                 </div>
                             </div>
                         </div>
@@ -119,14 +124,14 @@
                                 <div class="p-1 bg-danger-subtle rounded text-danger"><i data-lucide="alert-octagon"
                                         size="14"></i></div>
                                 <div>
-                                    <p class="mb-0 fw-bold">Security Violation</p>
-                                    <p class="mb-0 text-muted small">Suspicious IP blocked: 192.168.1.1</p>
-                                    <small class="text-muted">1 hour ago</small>
+                                    <p class="mb-0 fw-bold">ការបំពានសុវត្ថិភាព</p>
+                                    <p class="mb-0 text-muted small">បានបិទ IP ដែលគួរឱ្យសង្ស័យ: 192.168.1.1</p>
+                                    <small class="text-muted">១ ម៉ោងមុន</small>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <button class="btn btn-light w-100 mt-auto small fw-bold">View Global Logs</button>
+                    <button class="btn btn-light w-100 mt-auto small fw-bold">មើលកំណត់ត្រាសរុប</button>
                 </div>
             </div>
         </div>

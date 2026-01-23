@@ -30,8 +30,8 @@ const handleLogout = async () => {
     <div>
         <aside id="sidebar">
             <div class="sidebar-brand">
-                <h5> 
-                    <shield-check class="me-1" :size="42"/>
+                <h5>
+                    <shield-check class="me-1" :size="42" />
                     REABLIST<span class="text-black">ADMIN</span>
                 </h5>
             </div>
@@ -75,18 +75,22 @@ const handleLogout = async () => {
                     <div class="mb-3 mt-2 icon-box text-danger opacity-75">
                         <i class="bi bi-exclamation-triangle-fill"></i>
                     </div>
-                    <h2 class="fw-bold mb-2 text-dark">Confirm Logout</h2>
+
+                    <h2 class="fw-bold mb-2 text-dark">បញ្ជាក់ការចាកចេញ</h2>
+
                     <p class="text-muted mb-4 fs-6">
-                        Are you sure you want to log out of the system?
+                        តើអ្នកពិតជាចង់ចាកចេញពីប្រព័ន្ធមែនទេ?
                     </p>
+
                     <div class="d-flex justify-content-center gap-3 mb-2">
                         <BaseButton type="button" background="btn-custom-cancel btn-lg-custom" text="text-black"
                             @click="closeModal">
-                            Cancel
+                            បោះបង់
                         </BaseButton>
+
                         <BaseButton type="submit" :loading="loading" @click="handleLogout"
                             background=" btn-custom-delete btn-lg-custom" icon="bi bi-trash3-fill">
-                            {{ loading ? 'Logging out...' : ' Logout' }}
+                            {{ loading ? 'កំពុងចាកចេញ...' : ' ចាកចេញ' }}
                         </BaseButton>
                     </div>
                 </div>

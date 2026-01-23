@@ -73,26 +73,14 @@ const isAdmin = (role) =>
 
               <!-- Create user -->
               <template #cell-create="{ row }">
-                <check-circle
-                  v-if="isAdmin(row)"
-                  class="text-success"
-                />
-                <x-circle
-                  v-else
-                  class="text-danger"
-                />
+                <check-circle v-if="isAdmin(row)" class="text-success" />
+                <x-circle v-else class="text-danger" />
               </template>
 
               <!-- Change status -->
               <template #cell-status="{ row }">
-                <check-circle
-                  v-if="isAdmin(row)"
-                  class="text-success"
-                />
-                <x-circle
-                  v-else
-                  class="text-danger"
-                />
+                <check-circle v-if="isAdmin(row)" class="text-success" />
+                <x-circle v-else class="text-danger" />
               </template>
 
             </BaseTable>

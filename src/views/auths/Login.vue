@@ -6,6 +6,7 @@ import { ref } from 'vue';
 import router from '@/router';
 import BaseButton from '@/components/ui/BaseButton.vue';
 import BaseModal from '@/components/ui/BaseModal.vue';
+
 let authStore = useAuthStore();
 let email = ref('');
 let password = ref('');
@@ -16,12 +17,12 @@ let showModal = ref(false);
 const loginSham = z.object({
   email: z
     .string()
-    .min(1, 'Please enter your email!')
-    .email("Enter your email!"),
+    .min(1, 'សូមបញ្ចូលអ៊ីមែលរបស់អ្នក!') 
+    .email("សូមបញ្ចូលអ៊ីមែលឱ្យបានត្រឹមត្រូវ!"), 
   password: z
     .string()
-    .min(1, ' Please Enter your password!')
-    .min(8, 'Enter 8 latter for password!')
+    .min(1, 'សូមបញ្ចូលពាក្យសម្ងាត់របស់អ្នក!') 
+    .min(8, 'ពាក្យសម្ងាត់ត្រូវមានយ៉ាងតិច ៨ តួអក្សរ!') 
 });
 
 const handleLogin = async () => {
@@ -44,7 +45,7 @@ const handleLogin = async () => {
     router.push('/dashboard')
   } catch (err) {
     showModal.value = true;
-    authStore.message_error = "Please check your credentials and try again.";
+    authStore.message_error = "សូមពិនិត្យមើលអ៊ីមែល ឬពាក្យសម្ងាត់របស់អ្នក ហើយព្យាយាមម្តងទៀត។";
   } finally {
     loading.value = false;
   }
@@ -63,51 +64,56 @@ const closeModal = () => {
     <div class="row g-0 w-100 position-relative" style="z-index: 2;">
       <div class="col-lg-6 d-none d-lg-flex flex-column justify-content-center ps-5 text-white">
         <div class="p-5" style="max-width: 650px;">
-          <h3 class="display-4 fw-bold text-uppercase mb-3">Welcome Back</h3>
-          <h5 class="fw-normal mb-2">Your Handle Your Name</h5>
+          <h3 class="display-4 fw-bold text-uppercase mb-3">សូមស្វាគមន៍</h3>
+          <h5 class="fw-normal mb-2">ឈ្មោះរបស់អ្នក</h5>
           <p class=" fw-light opacity-75">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmo, dolor sit amet, consectetur
-            adipiscing elit, sed do eiusmod.
+             ប្រព័ន្ធគ្រប់គ្រងទិន្នន័យដែលមានសុវត្ថិភាព និងងាយស្រួលប្រើប្រាស់។
+             (Sample Khmer text describing the system)
           </p>
         </div>
       </div>
+
       <div class="col-lg-6 d-flex align-items-center justify-content-center p-4">
         <div class="w-100" style="max-width: 450px;">
-          <h1 class="fw-bold text-dark mb-2" style="font-size: 3rem;">Sign in</h1>
-          <p class="text-secondary mb-2">Lorem ipsum dolor amet, consectetur adipiscing.</p>
+          <h1 class="fw-bold text-dark mb-2" style="font-size: 3rem;">ចូលប្រើប្រាស់</h1>
+          <p class="text-secondary mb-2">សូមបញ្ចូលព័ត៌មានរបស់អ្នកដើម្បីបន្ត។</p>
 
           <form action="" @submit.prevent="handleLogin">
-            <BaseInput label="Email" type="email" placeholder="Enter your email" :message_error="error.email" v-model="email">
+            <BaseInput label="អ៊ីមែល" type="email" placeholder="បញ្ចូលអ៊ីមែលរបស់អ្នក" :message_error="error.email" v-model="email">
             </BaseInput>
-            <BaseInput label="Password" type="password" placeholder="Enter your password" :message_error="error.password" v-model="password">
+            <BaseInput label="ពាក្យសម្ងាត់" type="password" placeholder="បញ្ចូលពាក្យសម្ងាត់របស់អ្នក" :message_error="error.password" v-model="password">
             </BaseInput>
 
             <div class="d-flex justify-content-between align-items-center mb-4 form-actions">
               <div class="checkbox-container ">
                 <input type="checkbox" id="remember">
-                <label for="remember">Remember me</label>
+                <label for="remember">ចងចាំខ្ញុំ</label>
               </div>
-              <a href="#" class="forgot-link">Forget password?</a>
+              <a href="#" class="forgot-link">ភ្លេចពាក្យសម្ងាត់?</a>
             </div>
-            <BaseButton type="submit" :loading="loading"> {{ loading ? 'Loading...' : 'Sign in' }}</BaseButton>
+            
+            <BaseButton type="submit" :loading="loading"> 
+                {{ loading ? 'កំពុងដំណើរការ...' : 'ចូលប្រើប្រាស់' }}
+            </BaseButton>
           </form>
         </div>
       </div>
     </div>
+
     <BaseModal :show="showModal">
     <template #modal>
                 <div class="modal-content p-4 rounded-5 text-center">
                     <div class="mb-3 mt-2 icon-box text-danger opacity-75">
                         <i class="bi bi-exclamation-triangle-fill"></i>
                     </div>
-                    <h2 class="fw-bold mb-2 text-dark">Login failed</h2>
+                    <h2 class="fw-bold mb-2 text-dark">ការចូលប្រើប្រាស់បរាជ័យ</h2>
                     <p class="text-muted mb-4 fs-6">
                         {{ authStore.message_error }}
                     </p>
                     <div class="d-flex justify-content-center gap-3 mb-2">
                         <BaseButton type="button" background="btn-custom-cancel btn-lg-custom" text="text-black"
                             @click="closeModal">
-                            Cancel
+                            បិទ
                         </BaseButton>
                     </div>
                 </div>
@@ -117,7 +123,6 @@ const closeModal = () => {
 </template>
 
 <style scoped>
-/* 3. Social Button */
 .social-btn {
   width: 50px;
   height: 50px;
@@ -129,7 +134,6 @@ const closeModal = () => {
   background-color: #f8f9fa;
 }
 
-/* 4. BACKGROUND SHAPES */
 .shape-main {
   position: absolute;
   top: -10%;
@@ -168,7 +172,6 @@ const closeModal = () => {
   z-index: 1;
 }
 
-/* Actions */
 .form-actions {
   display: flex;
   justify-content: space-between;
@@ -202,7 +205,6 @@ input[type="checkbox"] {
   font-weight: 600;
 }
 
-/* Responsive Fix */
 @media (max-width: 991px) {
   .shape-main {
     width: 150%;
