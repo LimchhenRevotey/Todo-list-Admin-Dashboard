@@ -1,19 +1,10 @@
 <script setup>
 import { onMounted } from 'vue';
-import api from '@/api/api';
-import { ref } from 'vue';
+import { useProfileStore } from '@/stores/profileStore';
+let profileStore = useProfileStore();
 
-const admin = ref({});
-
-onMounted(async() => {
-   try{
-        const res = await api.get('/auth/profile');
-        admin.value = res.data.data;
-        
-   }
-   catch(error){
-        console.log(error);
-   }
+onMounted(() => {
+    profileStore.getProfiles();
 });
 </script>
 
@@ -31,17 +22,17 @@ onMounted(async() => {
         </div>
 
         <div class="d-flex align-items-center gap-3">
-            <div class="d-flex align-items-center gap-2 border-end pe-3">
+            <router-link :to="{ name: 'Profile' }" class="d-flex align-items-center gap-2 border-end pe-3 nav-link">
                 <div class="text-end d-none d-sm-block">
-                    <div class="fw-bold small">{{ admin.fullname }}</div>
-                    <div class="text-muted"
-                        style="font-size: 10px; font-weight: 800; color: var(--brand-primary) !important;">{{ admin.email }}
+                    <div class="fw-bold small">{{ profileStore.dataProfiles?.fullname }}</div>
+                    <div class="text-muted small fw-bold text-primary">
+                        {{ profileStore.dataProfiles?.email }}
                     </div>
                 </div>
-                <img :src="admin.avatar" class="rounded-circle border"
-                    width="40" alt="Admin">
 
-            </div>
+                <img :src="profileStore.dataProfiles?.avatar" class="rounded-circle border" width="50" height="50"
+                    alt="Avatar">
+            </router-link>
             <button type="button" class="btn  position-relative notification">
                 <i class="bi bi-bell-fill"></i>
                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
@@ -67,7 +58,8 @@ onMounted(async() => {
     top: 0;
     z-index: 1000;
 }
-.notification{
+
+.notification {
     color: var(--brand-primary);
     background-color: transparent;
     border: 2px solid var(--brand-primary);
@@ -78,7 +70,8 @@ onMounted(async() => {
     align-items: center;
     justify-content: center;
 }
-.notification:hover{
+
+.notification:hover {
     background-color: var(--brand-primary);
     color: #fff;
 }

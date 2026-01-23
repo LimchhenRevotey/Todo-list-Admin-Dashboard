@@ -121,7 +121,7 @@ async function toggleStatus(user) {
       </BaseTable>
 
       <div v-if="users.length === 0 && !isLoading" class="text-center py-5 text-muted">
-        No users found.
+        រកមិនឃើញអ្នកប្រើប្រាស់
       </div>
     </div>
   </section>

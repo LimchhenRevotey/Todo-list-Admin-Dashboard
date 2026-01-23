@@ -23,17 +23,18 @@ onMounted(() => {
 const shemaUser = z.object({
     fullName: z
         .string()
-        .min(1, 'Full Name is required'),
+        .min(1, 'សូមបញ្ចូលឈ្មោះពេញ!'),
     email: z
         .string()
-        .min(1, 'Email is required')
-        .email('Invalid email address'),
+        .min(1, 'សូមបញ្ចូលអ៊ីមែល!') 
+        .email('អ៊ីមែលមិនត្រឹមត្រូវទេ!'), 
     role: z
-        .number('Role is required'),
+        .number('សូមជ្រើសរើសតួនាទី!'), 
     password: z
         .string()
-        .min(8, 'Password must be at least 8 characters long')
+        .min(8, 'ពាក្យសម្ងាត់ត្រូវមានយ៉ាងតិច ៨ តួអក្សរ!') 
 });
+
 const handleCreateUser = async () => {
     let result = shemaUser.safeParse({
         fullName: formData.fullName,
@@ -82,7 +83,7 @@ const goBack = () => {
             <button class="btn btn-light text-dark py-2 rounded-circle text-decoration-none border-0" @click="goBack">
                 <i class="bi bi-chevron-left" style="-webkit-text-stroke: 1px;"></i>
             </button>
-            <h3 class="fw-bold mb-0">Create New User</h3>
+            <h3 class="fw-bold mb-0">បង្កើតអ្នកប្រើប្រាស់ថ្មី</h3>
         </div>
 
         <div class="row justify-content-center mt-4">
@@ -92,34 +93,38 @@ const goBack = () => {
                         <div class="row g-4">
 
                             <div class="col-md-6">
-                                <BaseInput label="Full Name" type="text" v-model="formData.fullName"
-                                    placeholder="Enter Your Full Name" :message_error="error.fullName"></BaseInput>
+                                <BaseInput label="ឈ្មោះពេញ" type="text" v-model="formData.fullName"
+                                    placeholder="បញ្ចូលឈ្មោះពេញរបស់អ្នក" :message_error="error.fullName"></BaseInput>
                             </div>
 
                             <div class="col-md-6">
-                                <BaseInput label="Email Address" type="email" v-model="formData.email"
-                                    placeholder="Enter Your Email" :message_error="error.email"></BaseInput>
+                                <BaseInput label="អ៊ីមែល" type="email" v-model="formData.email"
+                                    placeholder="បញ្ចូលអ៊ីមែលរបស់អ្នក" :message_error="error.email"></BaseInput>
                             </div>
 
                             <div class="col-12">
-                                <label class="form-label text-teal fw-bold mb-2">Assigns Role</label>
+                                <label class="form-label text-teal fw-bold mb-2">កំណត់តួនាទី</label>
                                 <select class="form-select form-control-custom" v-model="formData.role">
-                                    <option value="" disabled selected>Select a role</option>
-                                    <option v-for="role in roleStore.roles" :key="role.id" :value="role.id">{{ role.name
-                                        }}</option>
+                                    <option value="" disabled selected>សូមជ្រើសរើសតួនាទី</option>
+                                    <option v-for="role in roleStore.roles" :key="role.id" :value="role.id">
+                                        {{ role.name }}
+                                    </option>
                                 </select>
                                 <small class="text-danger">{{ error.role }}</small>
                             </div>
 
                             <div class="col-12">
-                                <BaseInput label="Password" type="password" v-model="formData.password"
-                                    placeholder="Enter Your Password" :message_error="error.password"></BaseInput>
+                                <BaseInput label="ពាក្យសម្ងាត់" type="password" v-model="formData.password"
+                                    placeholder="បញ្ចូលពាក្យសម្ងាត់របស់អ្នក" :message_error="error.password"></BaseInput>
                             </div>
 
                             <div class="col-12 pt-4 d-flex justify-content-end gap-3 border-top mt-4">
-                                <BaseButton type="button" background="btn-danger" @click="goBack"> Cancel</BaseButton>
-                                <BaseButton type="submit" :loading="loading">{{ loading ? 'Creating...' : 'Create User'
-                                    }}</BaseButton>
+                                <BaseButton type="button" background="btn-danger" @click="goBack"> 
+                                    បោះបង់
+                                </BaseButton>
+                                <BaseButton type="submit" :loading="loading">
+                                    {{ loading ? 'កំពុងបង្កើត...' : 'បង្កើត' }}
+                                </BaseButton>
                             </div>
                         </div>
                     </form>
