@@ -48,7 +48,7 @@ const createUser = () => {
 };
 
 // Toggle User Status
-async function toggleStatus(user) {
+const toggleStatus= async (user) => {
   const isActive = user.status === 'ACTIVATED';
   const newStatusString = isActive ? "DEACTIVATED" : "ACTIVATED";
   const oldStatus = user.status;

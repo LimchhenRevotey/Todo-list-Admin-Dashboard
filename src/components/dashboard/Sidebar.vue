@@ -30,10 +30,12 @@ const handleLogout = async () => {
     <div>
         <aside id="sidebar">
             <div class="sidebar-brand">
-                <h5>
-                    <shield-check class="me-1" :size="42" />
-                    REABLIST<span class="text-black">ADMIN</span>
-                </h5>
+                <router-link class="brand-modern text-decoration-none p-4 d-flex align-items-center justify-content-center" :to="{ name: 'Dashboard' }">
+                    <div class="brand-symbol">✓</div>
+                    <h5 class="fw-bold p-2 mb-0">
+                        <span class="text-teal">REABLIST</span><span class="text-black">ADMIN</span>
+                    </h5>
+                </router-link>
             </div>
 
             <div class="nav-label">ការគ្រប់គ្រង</div>
@@ -109,12 +111,14 @@ const handleLogout = async () => {
     display: flex;
     flex-direction: column;
 }
+.text-teal {
+    color: #1491a2;
+}   
 
 .sidebar-brand {
     height: 80px;
     display: flex;
     align-items: center;
-    padding: 0 2rem;
     font-weight: 800;
     color: var(--brand-primary);
 }
@@ -188,5 +192,24 @@ const handleLogout = async () => {
     padding: 10px 24px;
     font-size: 1rem;
     border-radius: 12px;
+}
+
+.brand-symbol {
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #1491a2, #0f5c69);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 900;
+    font-size: 24px;
+    box-shadow: 0 8px 20px rgba(19, 112, 127, 0.25);
+    transition: 0.3s;
+}
+
+.brand-modern:hover .brand-symbol {
+    transform: rotate(-8deg) scale(1.05);
 }
 </style>

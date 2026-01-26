@@ -16,7 +16,7 @@ const formData = reactive({
 });
 
 onMounted(() => {
-    watchEffect();
+    profileStore.getProfiles();
 });
 
 watchEffect(() => {
@@ -71,7 +71,6 @@ const handleAvatarUpload = async (event) => {
 };
 // delete avatar
 const handleDeleteAvatar = async () => {
-    // if (!confirm("Are you sure you want to remove your profile picture?")) return;
     try {
         isUploading.value = true;
         await api.delete('/auth/profile/avatar');
@@ -93,10 +92,10 @@ const goBack = () => {
     <div class="container-fluid " style="background-color: #f8f9fc;">
 
         <div class="d-flex align-items-center mb-4">
-            <button class="btn btn-link text-dark p-0 text-decoration-none border-0" @click="goBack">
+            <button class="btn btn-link text-dark p-1 text-decoration-none border-0" @click="goBack">
                 <i class="bi bi-arrow-left fs-3"></i>
             </button>
-            <h2 class="fw-bold mb-0">កែប្រែប្រវត្តិរូប</h2>
+            <h2 class="fw-bold mb-0 text-teal px-1"> កែប្រែប្រវត្តិរូប</h2>
         </div>
 
         <div class="row justify-content-center">

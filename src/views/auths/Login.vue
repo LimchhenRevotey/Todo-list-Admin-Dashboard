@@ -6,6 +6,7 @@ import { ref } from 'vue';
 import router from '@/router';
 import BaseButton from '@/components/ui/BaseButton.vue';
 import BaseModal from '@/components/ui/BaseModal.vue';
+import loginImage from '@/assets/images/bg-login.png';
 
 let authStore = useAuthStore();
 let email = ref('');
@@ -17,12 +18,12 @@ let showModal = ref(false);
 const loginSham = z.object({
   email: z
     .string()
-    .min(1, 'សូមបញ្ចូលអ៊ីមែលរបស់អ្នក!') 
-    .email("សូមបញ្ចូលអ៊ីមែលឱ្យបានត្រឹមត្រូវ!"), 
+    .min(1, 'សូមបញ្ចូលអ៊ីមែលរបស់អ្នក!')
+    .email("សូមបញ្ចូលអ៊ីមែលឱ្យបានត្រឹមត្រូវ!"),
   password: z
     .string()
-    .min(1, 'សូមបញ្ចូលពាក្យសម្ងាត់របស់អ្នក!') 
-    .min(8, 'ពាក្យសម្ងាត់ត្រូវមានយ៉ាងតិច ៨ តួអក្សរ!') 
+    .min(1, 'សូមបញ្ចូលពាក្យសម្ងាត់របស់អ្នក!')
+    .min(8, 'ពាក្យសម្ងាត់ត្រូវមានយ៉ាងតិច ៨ តួអក្សរ!')
 });
 
 const handleLogin = async () => {
@@ -32,7 +33,6 @@ const handleLogin = async () => {
   })
   authStore.message_error = "";
   error.value = {};
-
   if (!result.success) {
     let formated = result.error.format();
     error.value.email = formated.email?._errors[0] || '';
@@ -42,10 +42,16 @@ const handleLogin = async () => {
   try {
     loading.value = true;
     await authStore.login(email.value, password.value);
-    router.push('/dashboard')
+    router.push('/dashboard');
+
   } catch (err) {
     showModal.value = true;
-    authStore.message_error = "សូមពិនិត្យមើលអ៊ីមែល ឬពាក្យសម្ងាត់របស់អ្នក ហើយព្យាយាមម្តងទៀត។";
+    if (err.message === "UNAUTHORIZED_ROLE") {
+    } else {
+        if (!authStore.message_error) {
+             authStore.message_error = "អ៊ីមែល ឬពាក្យសម្ងាត់ដែលបានបញ្ចូលមិនត្រឹមត្រូវ។ សូមពិនិត្យមើល និងព្យាយាមម្តងទៀត។";
+        }
+    }
   } finally {
     loading.value = false;
   }
@@ -64,12 +70,13 @@ const closeModal = () => {
     <div class="row g-0 w-100 position-relative" style="z-index: 2;">
       <div class="col-lg-6 d-none d-lg-flex flex-column justify-content-center ps-5 text-white">
         <div class="p-5" style="max-width: 650px;">
-          <h3 class="display-4 fw-bold text-uppercase mb-3">សូមស្វាគមន៍</h3>
+          <!-- <h3 class="display-4 fw-bold text-uppercase mb-3">សូមស្វាគមន៍</h3>
           <h5 class="fw-normal mb-2">ឈ្មោះរបស់អ្នក</h5>
           <p class=" fw-light opacity-75">
              ប្រព័ន្ធគ្រប់គ្រងទិន្នន័យដែលមានសុវត្ថិភាព និងងាយស្រួលប្រើប្រាស់។
              (Sample Khmer text describing the system)
-          </p>
+          </p> -->
+          <img :src="loginImage" alt="Login Background" class="img-fluid rounded-4 shadow-sm">
         </div>
       </div>
 
@@ -79,9 +86,11 @@ const closeModal = () => {
           <p class="text-secondary mb-2">សូមបញ្ចូលព័ត៌មានរបស់អ្នកដើម្បីបន្ត។</p>
 
           <form action="" @submit.prevent="handleLogin">
-            <BaseInput label="អ៊ីមែល" type="email" placeholder="បញ្ចូលអ៊ីមែលរបស់អ្នក" :message_error="error.email" v-model="email">
+            <BaseInput label="អ៊ីមែល" type="email" placeholder="បញ្ចូលអ៊ីមែលរបស់អ្នក" :message_error="error.email"
+              v-model="email">
             </BaseInput>
-            <BaseInput label="ពាក្យសម្ងាត់" type="password" placeholder="បញ្ចូលពាក្យសម្ងាត់របស់អ្នក" :message_error="error.password" v-model="password">
+            <BaseInput label="ពាក្យសម្ងាត់" type="password" placeholder="បញ្ចូលពាក្យសម្ងាត់របស់អ្នក"
+              :message_error="error.password" v-model="password">
             </BaseInput>
 
             <div class="d-flex justify-content-between align-items-center mb-4 form-actions">
@@ -91,9 +100,9 @@ const closeModal = () => {
               </div>
               <a href="#" class="forgot-link">ភ្លេចពាក្យសម្ងាត់?</a>
             </div>
-            
-            <BaseButton type="submit" :loading="loading"> 
-                {{ loading ? 'កំពុងដំណើរការ...' : 'ចូលប្រើប្រាស់' }}
+
+            <BaseButton type="submit" :loading="loading">
+              {{ loading ? 'កំពុងដំណើរការ...' : 'ចូលប្រើប្រាស់' }}
             </BaseButton>
           </form>
         </div>
@@ -101,23 +110,23 @@ const closeModal = () => {
     </div>
 
     <BaseModal :show="showModal">
-    <template #modal>
-                <div class="modal-content p-4 rounded-5 text-center">
-                    <div class="mb-3 mt-2 icon-box text-danger opacity-75">
-                        <i class="bi bi-exclamation-triangle-fill"></i>
-                    </div>
-                    <h2 class="fw-bold mb-2 text-dark">ការចូលប្រើប្រាស់បរាជ័យ</h2>
-                    <p class="text-muted mb-4 fs-6">
-                        {{ authStore.message_error }}
-                    </p>
-                    <div class="d-flex justify-content-center gap-3 mb-2">
-                        <BaseButton type="button" background="btn-custom-cancel btn-lg-custom" text="text-black"
-                            @click="closeModal">
-                            បិទ
-                        </BaseButton>
-                    </div>
-                </div>
-            </template>
+      <template #modal>
+        <div class="modal-content p-4 rounded-5 text-center">
+          <div class="mb-3 mt-2 icon-box text-danger opacity-75">
+            <i class="bi bi-exclamation-triangle-fill"></i>
+          </div>
+          <h2 class="fw-bold mb-2 text-dark">ការចូលប្រើប្រាស់បរាជ័យ</h2>
+          <p class="text-muted mb-4 fs-6">
+            {{ authStore.message_error }}
+          </p>
+          <div class="d-flex justify-content-center gap-3 mb-2">
+            <BaseButton type="button" background="btn-custom-cancel btn-lg-custom" text="text-black"
+              @click="closeModal">
+              បិទ
+            </BaseButton>
+          </div>
+        </div>
+      </template>
     </BaseModal>
   </div>
 </template>
@@ -144,9 +153,10 @@ const closeModal = () => {
   border-radius: 50%;
   z-index: 1;
 }
+
 .icon-box {
-    font-size: 80px;
-    line-height: 1;
+  font-size: 80px;
+  line-height: 1;
 }
 
 .shape-bottom-left {
