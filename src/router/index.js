@@ -30,11 +30,11 @@ const router = createRouter({
           path: "dashboard",
           name: "Dashboard",
           component: Dashboard,
-          meta: { title: "Dashboard" },
+          meta: { title: "Dashboard", role: "ADMIN" },
         },
         {
           path: "profile",
-          
+
           children: [
             {
               path: "",
@@ -46,7 +46,7 @@ const router = createRouter({
               path: "/editProfile",
               name: "Edit Profile",
               component: EditProfile,
-              props:true,
+              props: true,
               meta: { title: "Edit Profile" },
             }
           ],
@@ -64,7 +64,7 @@ const router = createRouter({
               path: "/view-user/:id",
               name: "View-User",
               component: ViewUser,
-              props:true,
+              props: true,
               meta: { title: "View User" },
             },
             {
@@ -99,7 +99,7 @@ const router = createRouter({
           component: AuditTrail,
           meta: { title: "Audit Trails" },
         },
-        
+
       ],
     },
 
@@ -109,14 +109,21 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   let token = localStorage.getItem("token");
+  let role = localStorage.getItem("role");
   document.title = to.meta.title ? `${to.meta.title} | ReabList` : "ReabList";
-  if (!token && to.name !== "Login") {
-    next({ name: "Login" });
-  } else if (token && to.name === "Login") {
+  if (to.name !== "Login") {
+    if (!token) {
+      next({ name: "Login" });
+    } else if (role !== 'ADMIN') {
+      localStorage.clear();
+      next({ name: "Login" });
+    } else {
+      next();
+    }
+  } else if (to.name === "Login" && token && role === 'ADMIN') {
     next({ name: "Dashboard" });
   } else {
     next();
   }
 });
-
 export default router;

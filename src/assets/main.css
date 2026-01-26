@@ -44,3 +44,6 @@ body {
 h3{
   color:var(--brand-primary) !important;
 }
+.text-teal {
+    color: #13707F;
+}
