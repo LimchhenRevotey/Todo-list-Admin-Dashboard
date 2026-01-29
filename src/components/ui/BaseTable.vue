@@ -92,7 +92,7 @@ const changePage = (page) => {
         </tr>
       </tbody>
     </table>
-    <div v-if="totalPages > 1" class="pagination-container d-flex justify-content-between align-items-center mt-4 px-2">
+    <div v-if="totalPages > 1" class="pagination-container d-flex justify-content-between align-items-center mt-4 px-2 py-3">
       <small class="text-muted">
         ទំព័រ {{ currentPage }} នៃ {{ totalPages }}
       </small>
