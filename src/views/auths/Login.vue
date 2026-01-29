@@ -48,9 +48,9 @@ const handleLogin = async () => {
     showModal.value = true;
     if (err.message === "UNAUTHORIZED_ROLE") {
     } else {
-        if (!authStore.message_error) {
-             authStore.message_error = "អ៊ីមែល ឬពាក្យសម្ងាត់ដែលបានបញ្ចូលមិនត្រឹមត្រូវ។ សូមពិនិត្យមើល និងព្យាយាមម្តងទៀត។";
-        }
+      if (!authStore.message_error) {
+        authStore.message_error = "អ៊ីមែល ឬពាក្យសម្ងាត់ដែលបានបញ្ចូលមិនត្រឹមត្រូវ។ សូមពិនិត្យមើល និងព្យាយាមម្តងទៀត។";
+      }
     }
   } finally {
     loading.value = false;
@@ -63,34 +63,37 @@ const closeModal = () => {
 </script>
 
 <template>
-  <div class="container-fluid min-vh-100 position-relative overflow-hidden bg-white p-4 d-flex align-items-center">
-    <div class="shape-main"></div>
-    <div class="shape-bottom-left"></div>
-    <div class="shape-bottom-right"></div>
-    <div class="row g-0 w-100 position-relative" style="z-index: 2;">
-      <div class="col-lg-6 d-none d-lg-flex flex-column justify-content-center ps-5 text-white">
-        <div class="p-5" style="max-width: 650px;">
-          <img :src="loginImage" alt="Login Background" class="img-fluid rounded-4 shadow-sm">
+  <div class="login-wrapper container-fluid min-vh-100 d-flex align-items-center justify-content-center ">
+    <div class="card border-0 position-relative overflow-hidden d-flex flex-column justify-content-center ">
+      <div class="shape-main"></div>
+      <div class="shape-bottom-left "></div>
+      <div class="shape-bottom-center"></div>
+      <div class="shape-bottom-right"></div>
+      <div class="row g-0 w-100 " style="z-index: 2; max-width: 1200px;">
+        <div class="col-lg-6 d-none d-lg-flex flex-column justify-content-center ps-2 text-white images-left">
+          <div  style="max-width: 550px;">
+            <img :src="loginImage" alt="Login Background" class="img-fluid w-75">
+          </div>
         </div>
-      </div>
-      <div class="col-lg-6 d-flex align-items-center justify-content-center p-4">
-        
-        <div class=" w-100" style="max-width: 450px;">
-          <h1 class="fw-bold text-dark mb-2" style="font-size: 3rem;">ចូលប្រើប្រាស់</h1>
-          <p class="text-secondary mb-2">សូមបញ្ចូលព័ត៌មានរបស់អ្នកដើម្បីបន្ត។</p>
+        <div class="col-lg-6 d-flex align-items-center justify-content-center p-4">
 
-          <form action="" @submit.prevent="handleLogin">
-            <BaseInput label="អ៊ីមែល" type="email" placeholder="បញ្ចូលអ៊ីមែលរបស់អ្នក" :message_error="error.email"
-              v-model="email">
-            </BaseInput>
-            <BaseInput label="ពាក្យសម្ងាត់" type="password" placeholder="បញ្ចូលពាក្យសម្ងាត់របស់អ្នក"
-              :message_error="error.password" v-model="password">
-            </BaseInput>
-            <br>
-            <BaseButton type="submit" :loading="loading">
-              {{ loading ? 'កំពុងដំណើរការ...' : 'ចូលប្រើប្រាស់' }}
-            </BaseButton>
-          </form>
+          <div class=" w-100" style="max-width: 450px;">
+            <h1 class="fw-bold text-dark mb-2" style="font-size: 2.5rem;">ចូលប្រើប្រាស់</h1>
+            <p class="text-secondary mb-2">សូមបញ្ចូលព័ត៌មានរបស់អ្នកដើម្បីបន្ត។</p>
+
+            <form action="" @submit.prevent="handleLogin">
+              <BaseInput label="អ៊ីមែល" type="email" placeholder="បញ្ចូលអ៊ីមែលរបស់អ្នក" :message_error="error.email"
+                v-model="email">
+              </BaseInput>
+              <BaseInput label="ពាក្យសម្ងាត់" type="password" placeholder="បញ្ចូលពាក្យសម្ងាត់របស់អ្នក"
+                :message_error="error.password" v-model="password">
+              </BaseInput>
+              <br>
+              <BaseButton type="submit" :loading="loading">
+                {{ loading ? 'កំពុងដំណើរការ...' : 'ចូលប្រើប្រាស់' }}
+              </BaseButton>
+            </form>
+          </div>
         </div>
       </div>
     </div>
@@ -118,6 +121,19 @@ const closeModal = () => {
 </template>
 
 <style scoped>
+.login-wrapper{
+  background-color: #427c87;
+}
+
+.card{
+  width: 1000px !important;
+  height: 600px !important;
+  box-shadow: 1px 4px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 30px;
+}
+.images-left{
+  margin-bottom: 130px !important;
+}
 .social-btn {
   width: 50px;
   height: 50px;
@@ -131,10 +147,10 @@ const closeModal = () => {
 
 .shape-main {
   position: absolute;
-  top: -10%;
-  left: -20%;
-  width: 70vw;
-  height: 120vh;
+  top: -20%;
+  left: -16%;
+  width: 39vw;
+  height: 85vh;
   background-color: #427c87;
   border-radius: 50%;
   z-index: 1;
@@ -147,24 +163,38 @@ const closeModal = () => {
 
 .shape-bottom-left {
   position: absolute;
-  bottom: -150px;
-  left: -100px;
-  width: 350px;
-  height: 350px;
-  background-color: #32606a;
+  bottom: -90px;
+  left: -150px;
+  width: 300px;
+  height: 300px;
+  background: linear-gradient(180deg,#65afbc, #32606a);
   border-radius: 50%;
-  z-index: 2;
-  opacity: 0.9;
+  box-shadow: 1px 4px 20px rgba(216, 215, 215, 0.1);
+  z-index: 10;
+ 
+}
+.shape-bottom-center {
+  position: absolute;
+  bottom: 50px;
+  left: 26%;
+  transform: translateX(-50%);
+  width: 160px;
+  height: 160px;
+  background: linear-gradient(180deg,#65afbc, #32606a);
+  border-radius: 50%;
+  z-index: 10;
+ 
 }
 
 .shape-bottom-right {
   position: absolute;
-  bottom: -200px;
+  bottom: -130px;
   right: -150px;
-  width: 400px;
-  height: 400px;
-  background-color: #32606a;
+  width: 270px;
+  height: 270px;
+  background: linear-gradient(100deg,#4b98a5, #32606a);
   border-radius: 50%;
+  box-shadow: 1px 4px 20px rgba(216, 215, 215, 0.1);
   z-index: 1;
 }
 
