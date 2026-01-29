@@ -71,11 +71,11 @@ const closeModal = () => {
       <div class="shape-bottom-right"></div>
       <div class="row g-0 w-100 " style="z-index: 2; max-width: 1200px;">
         <div class="col-lg-6 d-none d-lg-flex flex-column justify-content-center ps-2 text-white images-left">
-          <div  style="max-width: 550px;">
+          <div  style="max-width: 550px;" class="px-4">
             <img :src="loginImage" alt="Login Background" class="img-fluid w-75">
           </div>
         </div>
-        <div class="col-lg-6 d-flex align-items-center justify-content-center p-4">
+        <div class="col-lg-6 d-flex align-items-center justify-content-center p-4 p-lg-5">
 
           <div class=" w-100" style="max-width: 450px;">
             <h1 class="fw-bold text-dark mb-2" style="font-size: 2.5rem;">ចូលប្រើប្រាស់</h1>
@@ -122,7 +122,7 @@ const closeModal = () => {
 
 <style scoped>
 .login-wrapper{
-  background-color: #427c87;
+  background-color: #9bc3cb;
 }
 
 .card{
@@ -149,7 +149,7 @@ const closeModal = () => {
   position: absolute;
   top: -20%;
   left: -16%;
-  width: 39vw;
+  width: 46vw;
   height: 85vh;
   background-color: #427c87;
   border-radius: 50%;
@@ -175,7 +175,7 @@ const closeModal = () => {
 }
 .shape-bottom-center {
   position: absolute;
-  bottom: 50px;
+  bottom: 25px;
   left: 26%;
   transform: translateX(-50%);
   width: 160px;
