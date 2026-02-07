@@ -23,6 +23,8 @@ const handleSearch = async () => {
         return;
     }
     isSearching.value = true;
+    showDropdown.value = true;
+
     try {
         const response = await api.get(`/users`, {
             params: {
@@ -40,8 +42,6 @@ const handleSearch = async () => {
         } else {
             searchResults.value = [];
         }
-
-        showDropdown.value = true;
     } catch (error) {
         console.error("Search Error Details:", error);
         searchResults.value = [];
@@ -90,34 +90,42 @@ onMounted(() => {
                         <i v-if="!isSearching" class="bi bi-search text-muted"></i>
                         <span v-else class="spinner-border spinner-border-sm text-primary"></span>
                     </span>
-                    <input type="text" v-model="searchQuery" @focus="showDropdown = searchResults.length > 0"
+                    <input type="text" v-model="searchQuery" @focus="showDropdown = searchQuery.length > 0"
                         @blur="closeDropdown" class="form-control border-0 py-2"
                         placeholder="ស្វែងរកឈ្មោះ, អ៊ីមែល, លេខទូរស័ព្ទ...">
                 </div>
 
-                <div v-if="showDropdown && searchResults.length > 0"
-                    class="custom-dropdown shadow-lg border-0 rounded-4">
-                    <div class="dropdown-header-title d-flex justify-content-between align-items-center">
-                        <span>អ្នកប្រើប្រាស់ដែលរកឃើញ</span>
-                        <span class="badge rounded-pill">{{ searchResults.length }} នាក់</span>
-                    </div>
+                <div v-if="showDropdown" class="custom-dropdown shadow-lg border-0 rounded-4">
 
-                    <div class="list-wrapper">
-                        <div v-for="user in searchResults" :key="user.id" @click="viewUser(user)"
-                            class="custom-search-item">
-
-                            <div class="avatar-wrapper">
-                                <img :src="user.avatar || 'https://ui-avatars.com/api/?name=' + user.fullname"
-                                    class="rounded-circle border-2 border-white shadow-sm" width="45" height="45">
-                                <div class="status-indicator"></div>
-                            </div>
-
-                            <div class="user-details overflow-hidden">
-                                <div class="user-name">{{ user.fullname }}</div>
-                                <div class="user-email text-truncate">{{ user.email }}</div>
-                            </div>
-                            <i class="bi bi-chevron-right ms-auto arrow-icon"></i>
+                    <template v-if="searchResults.length > 0">
+                        <div class="dropdown-header-title d-flex justify-content-between align-items-center">
+                            <span>អ្នកប្រើប្រាស់ដែលរកឃើញ</span>
+                            <span class="badge rounded-pill">{{ searchResults.length }} នាក់</span>
                         </div>
+
+                        <div class="list-wrapper">
+                            <div v-for="user in searchResults" :key="user.id" @click="viewUser(user)"
+                                class="custom-search-item">
+
+                                <div class="avatar-wrapper">
+                                    <img :src="user.avatar || 'https://ui-avatars.com/api/?name=' + user.fullname"
+                                        class="rounded-circle border-2 border-white shadow-sm" width="45" height="45">
+                                    <div class="status-indicator"></div>
+                                </div>
+
+                                <div class="user-details overflow-hidden">
+                                    <div class="user-name">{{ user.fullname }}</div>
+                                    <div class="user-email text-truncate">{{ user.email }}</div>
+                                </div>
+                                <i class="bi bi-chevron-right ms-auto arrow-icon"></i>
+                            </div>
+                        </div>
+                    </template>
+
+                    <div v-else-if="!isSearching && searchQuery.trim() !== ''" class="p-4 text-center">
+                        <i class="bi bi-search fs-2 text-muted mb-2"></i>
+                        <div class="fw-bold text-secondary small">រកមិនឃើញទិន្នន័យសម្រាប់ "{{ searchQuery }}"</div>
+                        <div class="text-muted" style="font-size: 0.7rem;">សូមព្យាយាមឆែកឈ្មោះ ឬអ៊ីមែលឡើងវិញ</div>
                     </div>
                 </div>
             </div>
@@ -160,7 +168,6 @@ onMounted(() => {
     z-index: 1000;
 }
 
-/* Custom Search Box UI */
 .custom-search-box {
     width: 420px;
     background: #f1f3f5;
@@ -185,7 +192,6 @@ onMounted(() => {
     box-shadow: none;
 }
 
-/* Modern Dropdown UI */
 .custom-dropdown {
     position: absolute;
     top: 115%;
