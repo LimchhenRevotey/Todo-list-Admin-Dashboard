@@ -69,6 +69,7 @@ const closeModal = () => {
       <div class="shape-bottom-left "></div>
       <div class="shape-bottom-center"></div>
       <div class="shape-bottom-right"></div>
+      <div class="shape-top"></div>
       <div class="row g-0 w-100 " style="z-index: 2; max-width: 1200px;">
         <div class="col-lg-6 d-none d-lg-flex flex-column justify-content-center ps-2 text-white images-left">
           <div  style="max-width: 550px;" class="px-4">
@@ -78,8 +79,8 @@ const closeModal = () => {
         <div class="col-lg-6 d-flex align-items-center justify-content-center p-4 p-lg-5">
 
           <div class=" w-100" style="max-width: 450px;">
-            <h1 class="fw-bold text-dark mb-2" style="font-size: 2.5rem;">ចូលប្រើប្រាស់</h1>
-            <p class="text-secondary mb-2">សូមបញ្ចូលព័ត៌មានរបស់អ្នកដើម្បីបន្ត។</p>
+            <h1 class="fw-bold text-dark mb-2" style="font-size: 2.5rem;">ចូលប្រើប្រាស់គណនី</h1>
+            <p class="text-secondary mb-2">សូមបញ្ចូលព័ត៌មានរបស់អ្នកដើម្បីបន្ត</p>
 
             <form action="" @submit.prevent="handleLogin">
               <BaseInput label="អ៊ីមែល" type="email" placeholder="បញ្ចូលអ៊ីមែលរបស់អ្នក" :message_error="error.email"
@@ -149,7 +150,7 @@ const closeModal = () => {
   position: absolute;
   top: -20%;
   left: -16%;
-  width: 46vw;
+  width: 44vw;
   height: 85vh;
   background-color: #427c87;
   border-radius: 50%;
@@ -190,6 +191,17 @@ const closeModal = () => {
   position: absolute;
   bottom: -130px;
   right: -150px;
+  width: 270px;
+  height: 270px;
+  background: linear-gradient(100deg,#4b98a5, #32606a);
+  border-radius: 50%;
+  box-shadow: 1px 4px 20px rgba(216, 215, 215, 0.1);
+  z-index: 1;
+}
+.shape-top {
+  position: absolute;
+  top: -130px;
+  right: -100px;
   width: 270px;
   height: 270px;
   background: linear-gradient(100deg,#4b98a5, #32606a);
