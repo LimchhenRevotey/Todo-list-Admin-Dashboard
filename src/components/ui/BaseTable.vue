@@ -77,7 +77,7 @@ const changePage = (page) => {
                 {{ row[col.key] }}
               </slot>
             </td>
-            <td v-if="$slots.actions">
+            <td v-if="$slots.actions" class="d-flex justify-content-center align-content-center">
               <slot name="actions" :row="row" />
             </td>
           </tr>
