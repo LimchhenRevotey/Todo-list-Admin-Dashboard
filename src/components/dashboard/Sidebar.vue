@@ -1,7 +1,7 @@
 <script setup>
 import { useAuthStore } from '@/stores/authStore';
 import BaseModal from '../ui/BaseModal.vue';
-import {  ref } from 'vue';
+import { ref } from 'vue';
 import BaseButton from '../ui/BaseButton.vue';
 import { useSideBarStore } from '@/stores/sideBar';
 let sideBarStore = useSideBarStore();
@@ -32,17 +32,19 @@ const handleLogout = async () => {
 <template>
     <div>
         <div id="overlay" :class="{ show: sideBarStore.isSideBarOpen }" @click="sideBarStore.closeSidebar"></div>
-        
         <aside id="sidebar" :class="{ open: sideBarStore.isSideBarOpen }">
             <div class="sidebar-brand">
-                <router-link class="brand-modern text-decoration-none p-4 d-flex align-items-center justify-content-center" :to="{ name: 'Dashboard' }">
-                    <div class="brand-symbol">✓</div>
+                <router-link
+                    class="brand-modern brand-area text-decoration-none p-4 d-flex align-items-center justify-content-center"
+                    :to="{ name: 'Dashboard' }">
+                    <div class="brand-logo">
+                        <i class="bi bi-check2-circle"></i>
+                    </div>
                     <h5 class="fw-bold p-2 mb-0">
                         <span class="text-teal">REABLIST</span><span class="text-black">ADMIN</span>
                     </h5>
                 </router-link>
             </div>
-
             <div class="nav-label">ការគ្រប់គ្រង</div>
             <nav class="nav flex-column">
                 <router-link :to="{ name: 'Dashboard' }" @click="sideBarStore.closeSidebar" class="nav-link">
@@ -117,29 +119,143 @@ const handleLogout = async () => {
     transition: transform 0.3s ease;
     z-index: 2000;
 }
+
 #sidebar.open {
-  transform: translateX(0);
+    transform: translateX(0);
 }
 
 #overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.4);
-  z-index: 1500;
-  display: none;
-  transition: opacity 0.3s ease;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 1500;
+    display: none;
+    transition: opacity 0.3s ease;
 }
 
 /* Overlay visible */
 #overlay.show {
     display: block;
 }
+
 .text-teal {
     color: #1491a2;
-}   
+}
+
+/* Logo */
+.logo-sticky {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+}
+
+.logo-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 30px;
+    padding-left: 8px;
+}
+
+.logo-box {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #0d9488;
+    border-radius: 14px;
+    color: #fff;
+    box-shadow: 0 8px 16px -4px rgba(13, 148, 136, 0.4);
+}
+
+.logo-text {
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+.brand-area {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    padding-left: 12px;
+    margin-left: -10px;
+}
+
+.brand-color {
+    color: #1491a2;
+    letter-spacing: 1px;
+}
+
+.brand-logo {
+    width: 46px;
+    height: 46px;
+    background: linear-gradient(145deg, #14b8a6, #0d9488);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.4rem;
+    box-shadow:
+        0 1px 2px rgba(13, 148, 136, 0.55),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+    transition: transform 0.35s ease;
+}
+
+.brand-area:hover .brand-logo {
+    transform: scale(1.1);
+}
+
+.brand-name {
+    font-weight: 900;
+    font-size: 1.5rem;
+    letter-spacing: -0.03em;
+    color: var(--text-main);
+}
+
+#reab-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+
+    width: 280px;
+    height: 100vh;
+    padding: 32px 24px;
+
+    display: flex;
+    flex-direction: column;
+
+    background: #ffffffe6;
+    backdrop-filter: blur(20px);
+    border-right: 1px solid rgba(226, 232, 240, 0.8);
+
+    z-index: 1100;
+    transform: translateX(0);
+    transition: transform 0.3s ease;
+
+    overflow-y: auto;
+    overscroll-behavior: contain;
+
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+#reab-sidebar::-webkit-scrollbar {
+    display: none;
+}
+
+.brand-last-color {
+    color: rgb(15, 69, 69);
+    letter-spacing: 1px;
+}
 
 .sidebar-brand {
     height: 80px;
@@ -240,8 +356,8 @@ const handleLogout = async () => {
 }
 
 @media (min-width: 992px) {
-  #sidebar {
-    transform: translateX(0);
-  }
+    #sidebar {
+        transform: translateX(0);
+    }
 }
 </style>
